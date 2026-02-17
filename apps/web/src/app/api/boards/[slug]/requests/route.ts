@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db, boards, requests } from '@feedbackhub/db';
-import { eq, and, desc, asc, sql } from 'drizzle-orm';
+import { db, boards, requests, eq, and, desc, asc, sql } from '@feedbackhub/db';
 import {
   CreateRequestSchema,
   ListRequestsQuerySchema,
   type CreateRequestInput,
   type ListRequestsQuery,
 } from '@/lib/validation/requests';
-import { AppError, NotFoundError, ValidationError } from '@/lib/errors';
+import { AppError, NotFoundError } from '@/lib/errors';
 
 /**
  * GET /api/boards/[slug]/requests

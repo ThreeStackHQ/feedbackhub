@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db, requests, votes, comments } from '@feedbackhub/db';
-import { eq, sql } from 'drizzle-orm';
+import { db, requests, votes, comments, eq, sql } from '@feedbackhub/db';
 import {
   MergeRequestsSchema,
   type MergeRequestsInput,

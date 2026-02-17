@@ -46,3 +46,34 @@ export class RateLimitError extends AppError {
     Object.setPrototypeOf(this, RateLimitError.prototype);
   }
 }
+
+/**
+ * Centralized error handler for API routes
+ * Converts errors to proper HTTP responses
+ */
+export function handleError(error: unknown) {
+  const { NextResponse } = require('next/server');
+
+  console.error('API Error:', error);
+
+  if (error instanceof AppError) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: error.statusCode }
+    );
+  }
+
+  if (error instanceof Error && 'issues' in error) {
+    // Zod validation error
+    return NextResponse.json(
+      { error: 'Validation failed', details: (error as any).issues },
+      { status: 400 }
+    );
+  }
+
+  // Unknown error
+  return NextResponse.json(
+    { error: 'Internal server error' },
+    { status: 500 }
+  );
+}

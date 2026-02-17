@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db, requests } from '@feedbackhub/db';
-import { eq } from 'drizzle-orm';
+import { db, requests, eq } from '@feedbackhub/db';
 import {
   UpdateRequestStatusSchema,
   type UpdateRequestStatusInput,
@@ -65,7 +64,7 @@ export async function PATCH(
  * Delete a request (admin only)
  */
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
   try {

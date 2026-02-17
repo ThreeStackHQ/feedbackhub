@@ -1,17 +1,13 @@
-import { getServerSession } from 'next-auth';
-import { db, boards } from '@feedbackhub/db';
-import { eq } from 'drizzle-orm';
+import { auth } from '@/auth';
+import { db, boards, users, eq } from '@feedbackhub/db';
 import { UnauthorizedError, ForbiddenError } from './errors';
-
-// Auth options would be imported from app/api/auth/[...nextauth]/route.ts
-// For now, we'll use default getServerSession()
 
 /**
  * Get the current authenticated user from session
  * Throws UnauthorizedError if not authenticated
  */
 export async function requireAuth() {
-  const session = await getServerSession();
+  const session = await auth();
   
   if (!session?.user?.email) {
     throw new UnauthorizedError('Authentication required');
@@ -46,10 +42,11 @@ export async function requireBoardOwnership(boardId: string, userId: string) {
  * Get user ID from email (helper for session-based lookups)
  */
 export async function getUserIdFromEmail(email: string): Promise<string> {
-  const user = await db.query.users.findFirst({
-    where: (users, { eq }) => eq(users.email, email),
-    columns: { id: true },
-  });
+  const [user] = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1);
   
   if (!user) {
     throw new UnauthorizedError('User not found');
