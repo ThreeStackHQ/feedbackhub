@@ -94,7 +94,7 @@ function getStatusColor(status: RequestStatus): string {
   return colors[status];
 }
 
-export default function PublicBoardPage({ params }: { params: { slug: string } }) {
+export default function PublicBoardPage({ params: _ }: { params: { slug: string } }) {
   const [requests, setRequests] = useState(mockRequests);
   const [statusFilter, setStatusFilter] = useState<'all' | RequestStatus>('all');
   const [categoryFilter, setCategoryFilter] = useState<'all' | RequestCategory>('all');
