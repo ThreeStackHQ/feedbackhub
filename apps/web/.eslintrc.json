@@ -1,0 +1,3 @@
+{
+  "extends": ["@feedbackhub/config/eslint-preset", "next/core-web-vitals"]
+}
