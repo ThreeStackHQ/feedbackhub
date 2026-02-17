@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 type RequestStatus = 'open' | 'in-progress' | 'completed';
-type RequestCategory = 'feature' | 'bug-fix' | 'improvement';
+// type RequestCategory = 'feature' | 'bug-fix' | 'improvement'; // Unused for now
 
 interface FeatureRequest {
   id: string;
