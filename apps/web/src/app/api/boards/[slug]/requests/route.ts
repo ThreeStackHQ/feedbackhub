@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from 'next/server';
 import { db, boards, requests, eq, and, desc, asc, sql } from '@feedbackhub/db';
 import {

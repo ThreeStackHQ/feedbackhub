@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
 import { db, comments, requests, eq, desc } from "@feedbackhub/db";
 import { z } from "zod";
